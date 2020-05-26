@@ -27,7 +27,7 @@ CREATE TABLE info (
 	hasKitchen BOOLEAN,
 	hasPillowsBlankets BOOLEAN,
 	sleepingArrangements_bedroom INT NOT NULL,
-	ID INT NOT NULL PRIMARY KEY
+	ID SERIAL PRIMARY KEY
 );
 
 COPY info FROM './db.csv' DELIMITER ',' SCV HEADER;
