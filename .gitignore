@@ -1,1 +1,6 @@
 node_modules
+
+database/data.jsonl
+database/data.csv
+database/db.jsonl
+database/db.csv
