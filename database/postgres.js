@@ -17,7 +17,7 @@ class ListingStream extends Readable {
       return;
     }
     const listing = generateListing();
-    listing.id = this.count;
+    // listing.id = this.count;
     this.push(JSON.stringify(listing));
     this.count += 1;
   }
