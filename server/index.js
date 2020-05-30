@@ -1,11 +1,12 @@
+require('newrelic');
 const express = require('express');
 const cors = require('cors');
+
 
 const getProduct = require('./connect_postgres.js');
 
 const app = express();
 const port = 3002;
-
 app.use(cors());
 app.use(express.static(`${__dirname}/../client/dist`));
 app.use(express.json());

@@ -1,10 +1,10 @@
-DROP DATABASE if exists info;
+-- DROP DATABASE if exists info;
 
-CREATE DATABASE info;
+-- CREATE DATABASE info;
 
-USE DATABASE info
+-- USE DATABASE info
 
-CREATE TABLE info (
+CREATE TABLE list (
 	city VARCHAR(100) NOT NULL,
 	title VARCHAR(100) NOT NULL,
 	hostImage VARCHAR(255) NOT NULL,
@@ -19,15 +19,7 @@ CREATE TABLE info (
 	isGreatCheckIn BOOLEAN,
 	isSelfCheckIn BOOLEAN,
 	roomDescription VARCHAR NOT NULL,
-	hasWiFi BOOLEAN,
-	hasEssentials BOOLEAN,
-	hasCable BOOLEAN,
-	hasLaptopSpace BOOLEAN,
-	hasHeating BOOLEAN,
-	hasKitchen BOOLEAN,
-	hasPillowsBlankets BOOLEAN,
-	sleepingArrangements_bedroom INT NOT NULL,
 	ID SERIAL PRIMARY KEY
 );
 
-COPY info FROM './db.csv' DELIMITER ',' SCV HEADER;
+\COPY info FROM './db.csv' DELIMITER ',' CSV HEADER;

@@ -1,4 +1,5 @@
 import React from 'react';
+const axios = require('axios');
 import $ from 'jquery';
 import Superhost from './Superhost.jsx';
 import GreatCheckin from './GreatCheckin.jsx';
@@ -13,17 +14,24 @@ class App extends React.Component {
         super();
         this.state = {
             listings: [],
-            displaySpaceText: false
+            displaySpaceText: false,
         }
         this.displaySpaceInfo = this.displaySpaceInfo.bind(this);
     }
 
     componentDidMount() {
-        $.get({
-            url: `/listings/${window.location.href.match(/id\s*=\s*(.*)/)[1]}`,
-            success: (data) => {
-                this.setState({listings: data});
-            }
+        // $.get({
+        //     url: `/listings/${window.location.href.match(/id\s*=\s*(.*)/)[1]}`,
+        //     success: (data) => {
+        //         this.setState({ listings: data });
+        //     }
+        // });
+        axios.get(`/listings/${window.location.href.match(/id\s*=\s*(.*)/)[1]}`)
+        .then(({ data }) => {
+            this.setState({ listings: data });
+        })
+        .catch((err) => {
+            console.log(err);
         });
     }
     displaySpaceInfo() {
@@ -46,8 +54,7 @@ class App extends React.Component {
         }}
         ><path d="m23.96 14.81-2.96-7.41v-5.02a1.39 1.39 0 0 0 -1.39-1.38h-15.22c-.77 0-1.39.62-1.39 1.38v5.02l-2.96 7.41-.04.19v5.61c0 .64.43 1.17 1.01 1.33 0 .02-.01.04-.01.06v1.5a.5.5 0 0 0 1 0v-1.5h20v1.5a.5.5 0 0 0 1 0v-1.5c0-.02-.01-.04-.01-.06a1.39 1.39 0 0 0 1.01-1.33v-5.61zm-19.96-12.43c0-.21.17-.38.39-.38h15.22a.39.39 0 0 1 .39.39v4.61h-1v-1.61c0-.77-.62-1.39-1.39-1.39h-3.21c-.78 0-1.4.62-1.4 1.39v1.61h-2v-1.61c0-.77-.62-1.39-1.39-1.39h-3.22c-.77 0-1.39.62-1.39 1.39v1.61h-1zm14 3.01v3.21a.39.39 0 0 1 -.39.39h-3.21a.39.39 0 0 1 -.4-.38v-3.22a.39.39 0 0 1 .39-.39h3.21a.39.39 0 0 1 .39.39zm-8 0v3.21a.39.39 0 0 1 -.39.4h-3.22a.39.39 0 0 1 -.39-.39v-3.22a.39.39 0 0 1 .39-.39h3.21a.39.39 0 0 1 .39.39zm-6.16 2.61h1.16v.61c0 .77.62 1.39 1.39 1.39h3.21c.78 0 1.4-.62 1.4-1.39v-.61h2v .61c0 .78.62 1.39 1.39 1.39h3.21c.78 0 1.4-.62 1.4-1.39v-.61h1.16l2.8 7h-21.92zm19.16 12.61c0 .21-.18.39-.39.39h-21.22a.39.39 0 0 1 -.39-.39v-4.61h22z" fillRule="evenodd"></path></svg>;
 
-        let {title,city, hostImage, roomInfo, numberOfGuests, numberOfBedrooms,numberOfBaths,numberOfBeds,isSuperhost,isGreatCheckIn,isSparklingClean,isGreatLocation,isSelfCheckIn, description} = this.state.listings;
-        
+        let {title,city, hostimage, roominfo, numberofguests, numberofbedrooms,numberofbaths,numberofbeds,issuperhost,isgreatcheckin,issparklingclean,isgreatlocation,isselfcheckin, roomdescription} = this.state.listings;
         return (
             <div className={css.main}>
                 <div className={css['title-summary-div']}>
@@ -59,7 +66,7 @@ class App extends React.Component {
                             {city}
                         </div>
                     </div>
-                    <div className={css['host-image']}><img className={css['host-image']} src={hostImage}/>
+                    <div className={css['host-image']}><img className={css['host-image']} src={hostimage}/>
                     </div>   
                 </div>
                 <div className={css.highlights}>
@@ -67,22 +74,22 @@ class App extends React.Component {
                         <div className={css.icon}><i className="fas fa-home fa-xs"></i></div>
                         <div className={css['room-description']}>
                         <div className={css['room-title']}>
-                            {roomInfo}
+                            {roominfo}
                         </div>
                         <div className = {css['guest-info-block']}>
-                            <div className = {css['guest-info']}>{numberOfGuests} guests</div>
-                            <div className = {css['guest-info']}>{numberOfBedrooms} {numberOfBedrooms === 1? 'bedroom':'bedrooms'}</div>
-                            <div className = {css['guest-info']}>{numberOfBeds} {numberOfBeds === 1? 'bed':'beds'}</div>
-                            <div className = {css['guest-info']}>{numberOfBaths} {numberOfBaths === 1? 'bath':'baths'}</div>
+                            <div className = {css['guest-info']}>{numberofguests} guests</div>
+                            <div className = {css['guest-info']}>{numberofbedrooms} {numberofbedrooms === 1? 'bedroom':'bedrooms'}</div>
+                            <div className = {css['guest-info']}>{numberofbeds} {numberofbeds === 1? 'bed':'beds'}</div>
+                            <div className = {css['guest-info']}>{numberofbaths} {numberofbaths === 1? 'bath':'baths'}</div>
                         </div>
                         </div>
                     </div>
 
-                    {isSuperhost && <Superhost/>}    
-                    {isGreatCheckIn && <GreatCheckin/>}
-                    {isSparklingClean && <SparklingClean/>}
-                    {isGreatLocation && <GreatLocation/>}
-                    {isSelfCheckIn && <SelfCheckin/>}
+                    {issuperhost && <Superhost/>}    
+                    {isgreatcheckin && <GreatCheckin/>}
+                    {issparklingclean && <SparklingClean/>}
+                    {isgreatlocation && <GreatLocation/>}
+                    {isselfcheckin && <SelfCheckin/>}
                 </div>
                 <hr/>
                 <div className={css['space-intro']}>
@@ -91,7 +98,7 @@ class App extends React.Component {
                 {/* {this.state.displaySpaceText ? ( */}
                     <div className={this.state.displaySpaceText ? `${css.space} ${css['space-visible']}` : css.space}>
                          <p><b>The Space</b></p>
-                         <p>{description}</p>
+                         <p>{roomdescription}</p>
                     </div>
                 {/* ): null} */}
                 <div className={css['space-onclick']} onClick={this.displaySpaceInfo}>
@@ -110,7 +117,7 @@ class App extends React.Component {
                     <div className={css['sleeping-title']}>Sleeping Arrangements</div>
                     <div className={css['sleeping-border']}>
                         <div className={css['svg-bed']}>{svgBed}</div>
-                        <div className={css['bedroom-num-sleeping']}>{numberOfBedrooms === 1? 'Bedroom':'Bedrooms'} {numberOfBedrooms}</div>
+                        <div className={css['bedroom-num-sleeping']}>{numberofbedrooms === 1? 'Bedroom':'Bedrooms'} {numberofbedrooms}</div>
                     </div>
                     <hr />
                </section>
