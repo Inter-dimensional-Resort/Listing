@@ -11,3 +11,5 @@ newrelic.js
 client/dist/bundle.js
 
 newrelic_agent.log
+
+info_service.pem

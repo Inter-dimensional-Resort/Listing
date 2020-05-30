@@ -1,6 +1,5 @@
 import React from 'react';
 const axios = require('axios');
-import $ from 'jquery';
 import Superhost from './Superhost.jsx';
 import GreatCheckin from './GreatCheckin.jsx';
 import SparklingClean from './SparklingClean.jsx';
