@@ -2,6 +2,12 @@ node_modules
 
 database/data.jsonl
 database/data.csv
-database/db.jsonl
+database/db.json
 database/db.csv
 server/.env
+
+newrelic.js 
+
+client/dist/bundle.js
+
+newrelic_agent.log

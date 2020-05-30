@@ -81,10 +81,10 @@ function generateListing() {
         isGreatCheckIn: booleanGenerator(),
         isSelfCheckIn: booleanGenerator(),
         description: faker.lorem.paragraph() + faker.lorem.paragraph(),
-        amenities: amenity(),
-        sleepingArrangements: {
-            bedroom: bedroom,
-        },
+        // amenities: amenity(),
+        // sleepingArrangements: {
+        //     bedroom: bedroom,
+        // },
     }
     return listing;
 }
